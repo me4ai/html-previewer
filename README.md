@@ -2,6 +2,8 @@
 
 A powerful, feature-rich HTML live preview editor with support for CSS and JavaScript. Built with modern web technologies and designed for developers.
 
+🌐 **[Try it now on GitHub Pages](https://me4ai.github.io/html-previewer/)**
+
 ## Features
 
 - **Multi-Language Support**
