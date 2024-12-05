@@ -429,6 +429,88 @@
             });
 
             loadSnippets();
+
+            const exampleCode = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to HTML Previewer Ultimate!</h1>
+        <p>This is a sample page to get you started.</p>
+        <ul>
+            <li>Write HTML in the editor</li>
+            <li>Add CSS styles in the CSS tab</li>
+            <li>Include JavaScript in the JS tab</li>
+            <li>See live preview instantly!</li>
+        </ul>
+    </div>
+</body>
+</html>`;
+
+            const exampleCSS = `body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #4CAF50;
+    text-align: center;
+}
+
+ul {
+    margin-top: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}`;
+
+            const exampleJS = `// Add some interactivity
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('li');
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            item.style.color = '#4CAF50';
+        });
+    });
+});`;
+
+            // Initialize editors with example code
+            editor.setValue(exampleCode);
+            cssEditor.setValue(exampleCSS);
+            jsEditor.setValue(exampleJS);
+
+            // Initial preview
+            updatePreview();
+
+            // Auto-update preview on changes
+            editor.on('change', () => {
+                updatePreview();
+            });
+
+            cssEditor.on('change', () => {
+                updatePreview();
+            });
+
+            jsEditor.on('change', () => {
+                updatePreview();
+            });
         });
 
         function switchTab(tab) {
@@ -455,11 +537,21 @@
                     <!DOCTYPE html>
                     <html>
                         <head>
-                            <style>${cssCode}</style>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <style>
+                                ${cssCode}
+                            </style>
                         </head>
                         <body>
                             ${htmlCode}
-                            <script>${jsCode}<\/script>
+                            <script>
+                                try {
+                                    ${jsCode}
+                                } catch(e) {
+                                    console.error('JavaScript Error:', e);
+                                }
+                            </script>
                         </body>
                     </html>
                 `);
